@@ -1,0 +1,53 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    text-decoration: none;
+    list-style: none;
+}
+
+html,
+body {
+    border: 1px solid transparency;
+    margin: 0px;
+    padding: 0px;
+    width: 100vw;
+    height: 100vh;
+    box-sizing: border-box;
+    font-family: "HarmonyOS_Sans_Regular";
+}
+
+/* 纤细 */
+@font-face {
+    font-family: "HarmonyOS_Sans_Thin";
+    src: url("@/assets/fonts/HarmonyOS_Sans/HarmonyOS_Sans_Thin.ttf");
+}
+
+/* 轻体 */
+@font-face {
+    font-family: "HarmonyOS_Sans_Light";
+    src: url("@/assets/fonts/HarmonyOS_Sans/HarmonyOS_Sans_Light.ttf");
+}
+
+/* 常规 */
+@font-face {
+    font-family: "HarmonyOS_Sans_Regular";
+    src: url("@/assets/fonts/HarmonyOS_Sans/HarmonyOS_Sans_Regular.ttf");
+}
+
+/* 中等粗细 */
+@font-face {
+    font-family: "HarmonyOS_Sans_Medium";
+    src: url("@/assets/fonts/HarmonyOS_Sans/HarmonyOS_Sans_Medium.ttf");
+}
+
+/* 粗体 */
+@font-face {
+    font-family: "HarmonyOS_Sans_Bold";
+    src: url("@/assets/fonts/HarmonyOS_Sans/HarmonyOS_Sans_Bold.ttf");
+}
+
+/* 黑体 */
+@font-face {
+    font-family: "HarmonyOS_Sans_Black";
+    src: url("@/assets/fonts/HarmonyOS_Sans/HarmonyOS_Sans_Black.ttf");
+}
