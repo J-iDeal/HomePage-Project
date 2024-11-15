@@ -2,15 +2,8 @@
 import { ref, onMounted } from 'vue';
 import dayjs from 'dayjs'
 import { Lunar } from 'lunar-javascript'
-
-
-// 搜索内容
-const searchValue = ref(' ')
-const search = () => {
-    window.location.href = `https://www.google.com/search?q=${searchValue.value}`
-}
-
-
+// 搜索引擎类型数据
+import { searchTypeData } from '@/api/searchTypeData.js'
 
 // 日期
 const timeData = ref({
@@ -41,9 +34,44 @@ const getTime = () => {
 }
 
 
+// 选择的搜索引擎
+const activeSearchType = ref({})
+// 获取初始搜索引擎
+const getInitialSearchType = () => {
+    searchTypeData.map(item => {
+        if (item.name == '必应') {
+            activeSearchType.value = item
+        }
+    })
+}
+// 搜索内容
+const searchValue = ref('')
+const search = () => {
+    window.location.href = `${activeSearchType.value.link}${searchValue.value}`
+}
+
+
+
+
+// 抽屉的展开/收起状态
+const drawerState = ref(false)
+
+
+
+console.log(searchTypeData);
+
+// 控制输入框背景色
+const isInputFocused = ref(false)
+const onFocus = () => {
+    isInputFocused.value = true;
+}
+const onBlur = () => {
+    isInputFocused.value = false;
+}
 
 onMounted(() => {
     getTime() // 获取日期
+    getInitialSearchType() // 初始化搜索引擎
 })
 </script>
 <template>
@@ -57,25 +85,37 @@ onMounted(() => {
                     timeData.lunarDay }}
             </div>
         </div>
-        <div class="search-box">
-            <div class="logo">
-                <img class="img" src="https://files.codelife.cc/itab/search/google.svg" alt="">
+        <div class="search-box"
+            :style="{ backgroundColor: isInputFocused ? 'rgba(255, 255, 255, 0.7)' : '' }">
+            <div class="search-logo" @click="drawerState = !drawerState">
+                <img class="img" :src="activeSearchType.logo" alt="">
                 <div class="arrows">
                     <img src="@/assets/icon/down.svg" alt="">
                 </div>
             </div>
-            <div class="input">
-                <input type="text" placeholder="输入搜索内容" v-model="searchValue" @keyup.enter.native="search" name="" />
+            <div class="search-input">
+                <input type="text" placeholder="输入搜索内容" v-model="searchValue" @keyup.enter.native="search"
+                    @focus="onFocus" @blur="onBlur" name="" />
             </div>
-            <div class="search" @click="search">
+            <div class="search-button" @click="search">
                 <img src="@/assets/icon/search.svg" alt="">
+            </div>
+            <div class="drawer-box" :style="[{ transform: (drawerState ? 'scaleY(1)' : 'scaleY(0)') }]">
+                <div class="li" v-for="(item, index) in searchTypeData" :key="index" :title="item.name"
+                    @click="activeSearchType = item">
+                    <div class="logo">
+                        <img :src="item.logo" alt="">
+                    </div>
+                    <div class="name">
+                        {{ item.name }}
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </template>
 <style lang="less" scoped>
 .app {
-    // border: 1px solid blue;
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -83,13 +123,13 @@ onMounted(() => {
     justify-content: center;
 
     .time-box {
-        // border: 1px solid #ff0000;
         color: #fff;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         text-shadow: 0 2px 6px rgb(0 0 0 / 16%);
+        margin-top: -380px;
 
         .time {
             font-size: 70px;
@@ -109,29 +149,30 @@ onMounted(() => {
         height: 46px;
         z-index: 1;
         border-radius: 23px;
+        background-color: rgba(255, 255, 255, 0.2);
         backdrop-filter: blur(18px);
-        box-shadow: 0 0 10px 3px #0000001a;
-        background-color: rgba(255, 255, 255, 0.7);
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 10px 3px;
         margin: 15px 0;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        overflow: hidden;
+        position: relative;
+        transition: all 0.2s;
 
-        .logo {
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.7);
+        }
+
+        .search-logo {
             width: 50px;
             height: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
-            backdrop-filter: blur(18px);
-            background-color: rgba(255, 255, 255, 0.7);
+            // background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 23px 0 0 23px;
             cursor: pointer;
-
-            &:hover {
-                background-color: rgba(255, 255, 255, 0.4);
-            }
 
             img {
                 width: 20px;
@@ -139,7 +180,6 @@ onMounted(() => {
             }
 
             .arrows {
-                // border: 1px solid #ff0000;
                 position: absolute;
                 width: 14px;
                 height: 14px;
@@ -157,16 +197,14 @@ onMounted(() => {
             }
         }
 
-        .input {
-            // border: 1px solid #ff0000;
+        .search-input {
             flex: 1;
             height: 100%;
             display: flex;
             align-items: center;
             justify-content: left;
             padding: 0 10px;
-            background-color: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(18px);
+            // background-color: rgba(255, 255, 255, 0.5);
 
             input {
                 outline: none;
@@ -177,8 +215,9 @@ onMounted(() => {
                 color: #222;
                 font-size: 14px;
                 font-family: "HarmonyOS_Sans_Regular";
-                background-color: rgba(255, 255, 255, 0.7);
+                background-color: transparent;
                 padding: 0 0 0 5px;
+                z-index: 9999;
 
                 &::placeholder {
                     color: rgba(0, 0, 0, 0.3);
@@ -187,20 +226,16 @@ onMounted(() => {
             }
         }
 
-        .search {
+        .search-button {
             width: 50px;
             height: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            backdrop-filter: blur(18px);
-            background-color: rgba(255, 255, 255, 0.7);
+            // background-color: rgba(255, 255, 255, 0.5);
             transition: 0.2s;
+            border-radius: 0 23px 23px 0;
             cursor: pointer;
-
-            &:hover {
-                background-color: rgba(255, 255, 255, 0.4);
-            }
 
             &:active {
                 img {
@@ -211,6 +246,68 @@ onMounted(() => {
             img {
                 width: 20px;
                 height: 20px;
+            }
+        }
+
+        .drawer-box {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            height: auto;
+            background-color: #fefefe;
+            border-radius: 23px;
+            padding: 10px;
+            box-sizing: border-box;
+            margin: 6px 0;
+            display: grid;
+            grid-template-columns: repeat(9, 1fr);
+            grid-template-rows: 72px;
+            background-color: rgba(255, 255, 255, 0.8);
+            transition: all 0.2s;
+
+            .li {
+                width: 100%;
+                height: 72px;
+                padding: 5px 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: space-around;
+                border-radius: 15px;
+                transition: background 0.2s;
+                cursor: pointer;
+                box-sizing: border-box;
+
+                &:hover {
+                    background-color: #f1f1f2;
+                }
+
+                .logo {
+                    width: 36px;
+                    height: 36px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background-color: #fff;
+                    border-radius: 8px;
+                    box-shadow: 0 0 10px 3px #0000000d;
+
+                    img {
+                        width: 20px;
+                        height: 20px;
+                    }
+                }
+
+                .name {
+                    width: 55px;
+                    text-align: center;
+                    font-size: 12px;
+                    color: #222;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
             }
         }
     }
