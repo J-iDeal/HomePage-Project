@@ -44,21 +44,28 @@ const getInitialSearchType = () => {
         }
     })
 }
+// 搜索类型切换
+const activeSearchTypeChange = (item) => {
+    activeSearchType.value = item
+    drawerState.value = false
+}
+
 // 搜索内容
 const searchValue = ref('')
 const search = () => {
     window.location.href = `${activeSearchType.value.link}${searchValue.value}`
 }
 
-
-
-
 // 抽屉的展开/收起状态
 const drawerState = ref(false)
-
-
-
-console.log(searchTypeData);
+// 抽屉状态切换
+const drawerStateChange = () => {
+    if (drawerState.value) {
+        drawerState.value = false
+    } else {
+        drawerState.value = true
+    }
+}
 
 // 控制输入框背景色
 const isInputFocused = ref(false)
@@ -85,9 +92,8 @@ onMounted(() => {
                     timeData.lunarDay }}
             </div>
         </div>
-        <div class="search-box"
-            :style="{ backgroundColor: isInputFocused ? 'rgba(255, 255, 255, 0.7)' : '' }">
-            <div class="search-logo" @click="drawerState = !drawerState">
+        <div class="search-box" :style="{ backgroundColor: isInputFocused ? 'rgba(255, 255, 255, 0.7)' : '' }">
+            <div class="search-logo" @click="drawerStateChange">
                 <img class="img" :src="activeSearchType.logo" alt="">
                 <div class="arrows">
                     <img src="@/assets/icon/down.svg" alt="">
@@ -100,9 +106,10 @@ onMounted(() => {
             <div class="search-button" @click="search">
                 <img src="@/assets/icon/search.svg" alt="">
             </div>
-            <div class="drawer-box" :style="[{ transform: (drawerState ? 'scaleY(1)' : 'scaleY(0)') }]">
+            <div class="drawer-box"
+                :style="[{ 'clip-path': (drawerState ? 'polygon(0 0, 100% 0%, 100% 99%, 0 99%)' : 'polygon(0 0, 100% 0%, 100% 0, 0 0)') }]">
                 <div class="li" v-for="(item, index) in searchTypeData" :key="index" :title="item.name"
-                    @click="activeSearchType = item">
+                    @click="activeSearchTypeChange(item)">
                     <div class="logo">
                         <img :src="item.logo" alt="">
                     </div>
@@ -203,8 +210,6 @@ onMounted(() => {
             display: flex;
             align-items: center;
             justify-content: left;
-            padding: 0 10px;
-            // background-color: rgba(255, 255, 255, 0.5);
 
             input {
                 outline: none;
@@ -216,7 +221,7 @@ onMounted(() => {
                 font-size: 14px;
                 font-family: "HarmonyOS_Sans_Regular";
                 background-color: transparent;
-                padding: 0 0 0 5px;
+                padding: 0 10px 0 15px;
                 z-index: 9999;
 
                 &::placeholder {
@@ -265,6 +270,7 @@ onMounted(() => {
             grid-template-rows: 72px;
             background-color: rgba(255, 255, 255, 0.8);
             transition: all 0.2s;
+
 
             .li {
                 width: 100%;

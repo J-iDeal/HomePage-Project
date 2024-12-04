@@ -5,7 +5,6 @@ import pageHead from '@/components/pageHead.vue';
 import pageBody from '@/components/pageBody.vue';
 import pageFoot from '@/components/pageFoot.vue';
 
-console.log(1);
 </script>
 
 <template>
@@ -15,7 +14,6 @@ console.log(1);
     <pageFoot />
     <div class="video-box">
       <video :controls="false" autoplay="true" muted loop>
-        <!-- <source src="@/assets/下载.mp4" type="video/mp4" /> -->
         <source src="https://files.codelife.cc/itab/defaultWallpaper/videos/81.mp4" type="video/mp4" />
       </video>
     </div>

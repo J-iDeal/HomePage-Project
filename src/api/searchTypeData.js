@@ -25,129 +25,29 @@ import logo_kaifabaidu from '@/assets/search-logo/kaifabaidu.svg';
 import logo_toutiao from '@/assets/search-logo/toutiao.svg';
 
 export const searchTypeData = [
-    {
-        name: '百度',
-        logo: logo_baidu,
-        link: 'https://www.baidu.com/s?&tn=68018901_2_oem_dg&ie=utf-8&wd=',
-    },
-    {
-        name: 'Google',
-        logo: logo_google,
-        link: 'https://www.google.com/search?q=',
-    },
-    {
-        name: '必应',
-        logo: logo_bing,
-        link: 'https://www.bing.com/search?q=',
-    },
-    {
-        name: '秘塔AI',
-        logo: logo_metaso,
-        link: 'https://metaso.cn/?s=itab1&q=',
-    },
-    {
-        name: 'Yandex',
-        logo: logo_yandex,
-        link: 'https://yandex.com/search/?text=',
-    },
-    {
-        name: '360搜索',
-        logo: logo_360,
-        link: 'https://www.so.com/s?q=',
-    },
-    {
-        name: 'F搜',
-        logo: logo_fsou,
-        link: 'https://fsoufsou.com/search?q=',
-    },
-    {
-        name: '搜狗',
-        logo: logo_sougou,
-        link: 'https://www.sogou.com/sogou?query=',
-    },
-    {
-        name: 'GitHub',
-        logo: logo_github,
-        link: 'https://github.com/search?q=',
-    },
-    {
-        name: '抖音',
-        logo: logo_douyin,
-        link: 'https://www.douyin.com/search/%s?ug_source=lenovo_stream',
-    },
-    {
-        name: '京东',
-        logo: logo_jd,
-        link: 'https://www.xiaohongshu.com/search_result/?&m_source=itab&keyword=',
-    },
-    {
-        name: '小红书',
-        logo: logo_xiaohongshu,
-        link: 'https://www.xiaohongshu.com/search_result/?&amp;m_source=itab&amp;keyword=',
-    },
-    {
-        name: '淘宝',
-        logo: logo_taobao,
-        link: 'https://ai.taobao.com/search/index.htm?pid=mm_31205575_2237000308_114588650482&amp;union_lens=lensId%3APUB%401667806444%402104ee54_0bea_1845102bd01_03e9%4001&amp;key=',
-    },
-    {
-        name: '微博',
-        logo: logo_weibo,
-        link: 'https://s.weibo.com/weibo?q=',
-    },
-    {
-        name: '哔哩哔哩',
-        logo: logo_bilibili,
-        link: 'https://search.bilibili.com/all?keyword=',
-    },
-    {
-        name: 'NAVER',
-        logo: logo_naver,
-        link: 'https://search.naver.com/search.naver?&amp;query=312',
-    },
-    {
-        name: 'MDN',
-        logo: logo_mdn,
-        link: 'https://developer.mozilla.org/zh-CN/search?q=',
-    },
-    {
-        name: 'Yahoo',
-        logo: logo_yahoo,
-        link: 'https://hk.search.yahoo.com/search?p=',
-    },
-    {
-        name: '知乎',
-        logo: logo_zhihu,
-        link: 'https://www.zhihu.com/search?type=content&amp;q=',
-    },
-    {
-        name: 'Google Scholar',
-        logo: logo_googlescholar,
-        link: 'https://scholar.google.com/scholar?q=',
-    },
-    {
-        name: 'DuckDuckGo',
-        logo: logo_duckduckgo,
-        link: 'https://duckduckgo.com/?q=',
-    },
-    {
-        name: 'StackOverflow',
-        logo: logo_stackoverflow,
-        link: 'https://stackoverflow.com/nocaptcha?s=',
-    },
-    {
-        name: '豆瓣',
-        logo: logo_douban,
-        link: 'https://www.douban.com/search?q=',
-    },
-    {
-        name: '开发者搜索',
-        logo: logo_kaifabaidu,
-        link: 'https://kaifa.baidu.com/searchPage?wd=',
-    },
-    {
-        name: '头条搜索',
-        logo: logo_toutiao,
-        link: 'https://so.toutiao.com/search?dvpf=pc&amp;keyword=',
-    }
+    { name: '必应', logo: logo_bing, link: 'https://www.bing.com/search?q=', },
+    { name: 'Google', logo: logo_google, link: 'https://www.google.com/search?q=', },
+    { name: 'GitHub', logo: logo_github, link: 'https://github.com/search?q=', },
+    { name: 'Yandex', logo: logo_yandex, link: 'https://yandex.com/search/?text=', },
+    { name: '抖音', logo: logo_douyin, link: 'https://www.douyin.com/search/%s?ug_source=lenovo_stream', },
+    { name: '小红书', logo: logo_xiaohongshu, link: 'https://www.xiaohongshu.com/search_result/?&amp;m_source=itab&amp;keyword=', },
+    { name: '秘塔AI', logo: logo_metaso, link: 'https://metaso.cn/?s=itab1&q=', },
+    { name: '知乎', logo: logo_zhihu, link: 'https://www.zhihu.com/search?type=content&amp;q=', },
+    { name: '哔哩哔哩', logo: logo_bilibili, link: 'https://search.bilibili.com/all?keyword=', },
+    { name: '百度', logo: logo_baidu, link: 'https://www.baidu.com/s?&tn=68018901_2_oem_dg&ie=utf-8&wd=', },
+    { name: '360搜索', logo: logo_360, link: 'https://www.so.com/s?q=', },
+    { name: 'F搜', logo: logo_fsou, link: 'https://fsoufsou.com/search?q=', },
+    { name: '搜狗', logo: logo_sougou, link: 'https://www.sogou.com/sogou?query=', },
+    { name: '京东', logo: logo_jd, link: 'https://www.xiaohongshu.com/search_result/?&m_source=itab&keyword=', },
+    { name: '淘宝', logo: logo_taobao, link: 'https://ai.taobao.com/search/index.htm?pid=mm_31205575_2237000308_114588650482&amp;union_lens=lensId%3APUB%401667806444%402104ee54_0bea_1845102bd01_03e9%4001&amp;key=', },
+    { name: '微博', logo: logo_weibo, link: 'https://s.weibo.com/weibo?q=', },
+    { name: 'NAVER', logo: logo_naver, link: 'https://search.naver.com/search.naver?&amp;query=312', },
+    { name: 'MDN', logo: logo_mdn, link: 'https://developer.mozilla.org/zh-CN/search?q=', },
+    { name: 'Yahoo', logo: logo_yahoo, link: 'https://hk.search.yahoo.com/search?p=', },
+    { name: 'Google Scholar', logo: logo_googlescholar, link: 'https://scholar.google.com/scholar?q=', },
+    { name: 'DuckDuckGo', logo: logo_duckduckgo, link: 'https://duckduckgo.com/?q=', },
+    { name: 'StackOverflow', logo: logo_stackoverflow, link: 'https://stackoverflow.com/nocaptcha?s=', },
+    { name: '豆瓣', logo: logo_douban, link: 'https://www.douban.com/search?q=', },
+    { name: '开发者搜索', logo: logo_kaifabaidu, link: 'https://kaifa.baidu.com/searchPage?wd=', },
+    { name: '头条搜索', logo: logo_toutiao, link: 'https://so.toutiao.com/search?dvpf=pc&amp;keyword=', }
 ]
